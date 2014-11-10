@@ -10,4 +10,4 @@ Todo
 * Styling - Make it look pretty
 * Mobile styling - Make it look pretty on smaller screens
 * Lock it down - Start locking it down in the usual way
-* Push to meteor.com
+* ~~Push to jstips.meteor.com~~
