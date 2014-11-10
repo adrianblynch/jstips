@@ -19,7 +19,7 @@
 <template name="tips">
 	<ul id="tips">
 		{{#each tips}}
-			{{>tip}}
+			{{> tip}}
 		{{/each}}
 	</ul>
 </template>
@@ -30,19 +30,20 @@
 		<span>Date and time {{created}}</span><br />
 		<span>By {{owner.username}}</span><br />
 		{{#markdown}}{{body}}{{/markdown}}
+		<span><button>Delete</button></span>
 	</li>
 </template>
 
 <template name="tipForm">
-	<form>
-		<input type="text" name="title" value="The very first tip" placeholder="Name your tip..." />
-		<textarea name="body" placeholder="Markdown your tip...">Here's some code:
-
-```
-var codeBlock = true;
-```
-
-And there you have it!</textarea>
+	<form id="newTip">
+		<div class="title">
+			<input type="text" name="title" placeholder="Name your tip..." />
+		</div>
+		<div class="body">
+			<textarea name="body" placeholder="Markdown your tip..."></textarea>
+		</div>
+		<section id="preview">Preview here</section>
 		<input type="submit" value="Add new tip" />
 	</form>
+	<!-- {{> tip tipPreview}} -->
 </template>
