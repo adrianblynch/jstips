@@ -37,12 +37,12 @@
 <template name="tipForm">
 	<form id="newTip">
 		<div class="title">
-			<input type="text" name="title" placeholder="Name your tip..." />
+			<input type="text" name="title" placeholder="Name your tip..." value="{{title}}" />
 		</div>
 		<div class="body">
 			<textarea name="body" placeholder="Markdown your tip..."></textarea>
 		</div>
-		<section id="preview">Preview here</section>
+		<section id="preview">{{preview}}</section>
 		<input type="submit" value="Add new tip" />
 	</form>
 	<!-- {{> tip tipPreview}} -->

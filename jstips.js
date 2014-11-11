@@ -19,26 +19,28 @@ if (Meteor.isClient) {
 	});
 
 	Template.tipForm.helpers({
-		tipPreview: function() {
-			// How to populate this object?
-			return {
-				title: "Title...",
-				created: new Date(),
-				owner: {
-					username: "Username"
-				},
-				body: "__bold__"
-			};
-		}
+		title: function() {
+			return Session.get("title");
+		},
+		body: function() {
+			return Session.get("body");
+		},
+		preview: function() {
+			var preview = "";
+			try {
+				preview = marked(Session.get("body"));
+			} catch(e) {
+				// Do nothing - This is crap but it'll work for now
+			}
+			return preview; // How to push the HTML into the DOM and not the entities?
+		},
 	});
 
 	Template.tipForm.events({
 		"submit form": function(e) {
-			var title = e.target.title;
-			var body = e.target.body;
 			Tips.insert({
-				title: title.value,
-				body: body.value,
+				title: Session.get("title"),
+				body: Session.get("body"),
 				created: new Date(),
 				approved: true, // Whilst developing - Will be an admin feature
 				owner: {
@@ -46,24 +48,20 @@ if (Meteor.isClient) {
 					username: Meteor.user().username
 				}
 			});
-			title.value = "";
-			body.value = "";
-			document.getElementById("preview").innerHTML = "";
+			Session.set("title", "");
+			Session.set("body", "");
+			Session.set("preview", "");
 			return false;
 		},
-		"click input[name='myTips']": function(e) {
+		"keyup input[name='title']": function(e) {
 			Session.set("title", e.target.value);
 		},
 		"keyup textarea[name='body']": function(e) {
-			var body = e.target.value;
-			var preview = "";
-			try {
-				preview = marked(body, {sanitize: true});
-			} catch(e) {
-				// Do nothing - This is crap but it'll work for now
-			}
-			document.getElementById("preview").innerHTML = preview;
-		}
+			Session.set("body", e.target.value);
+		},
+		// "click input[name='myTips']": function(e) {
+		// 	//Session.set("title", e.target.value);
+		// }
 	});
 
 	marked('# Marked in browser\n\nRendered by **marked**.');
