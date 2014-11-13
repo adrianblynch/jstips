@@ -30,7 +30,9 @@
 		<span>Date and time {{created}}</span><br />
 		<span>By {{owner.username}}</span><br />
 		{{#markdown}}{{body}}{{/markdown}}
-		<span><button>Delete</button></span>
+		{{#if showDelete}}
+			<span><button>Delete</button></span>
+		{{/if}}
 	</li>
 </template>
 
@@ -42,8 +44,7 @@
 		<div class="body">
 			<textarea name="body" placeholder="Markdown your tip..."></textarea>
 		</div>
-		<section id="preview">{{preview}}</section>
+		<section id="preview">{{{preview}}}</section>
 		<input type="submit" value="Add new tip" />
 	</form>
-	<!-- {{> tip tipPreview}} -->
 </template>

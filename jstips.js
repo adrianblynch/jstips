@@ -18,6 +18,12 @@ if (Meteor.isClient) {
 		}
 	});
 
+	Template.tip.helpers({
+		showDelete: function () {
+			return Meteor.user() && (Meteor.user()._id === this.owner.id);
+		}
+	});
+
 	Template.tipForm.helpers({
 		title: function() {
 			return Session.get("title");
@@ -32,7 +38,7 @@ if (Meteor.isClient) {
 			} catch(e) {
 				// Do nothing - This is crap but it'll work for now
 			}
-			return preview; // How to push the HTML into the DOM and not the entities?
+			return preview;
 		},
 	});
 
@@ -55,6 +61,7 @@ if (Meteor.isClient) {
 		},
 		"keyup input[name='title']": function(e) {
 			Session.set("title", e.target.value);
+			console.log(Meteor.user().profile);
 		},
 		"keyup textarea[name='body']": function(e) {
 			Session.set("body", e.target.value);
@@ -63,7 +70,5 @@ if (Meteor.isClient) {
 		// 	//Session.set("title", e.target.value);
 		// }
 	});
-
-	marked('# Marked in browser\n\nRendered by **marked**.');
 
 }
