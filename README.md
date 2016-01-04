@@ -1,10 +1,8 @@
-jstips
-======
+# JS Tips
 
 JavaScript tips presented via Meteor.
 
-Todo
-----
+## Todo
 
 * Code tidy - Remove commented out code
 * Styling - Make it look pretty
